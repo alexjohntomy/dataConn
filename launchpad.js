@@ -3,6 +3,7 @@ let number = Math.round(Math.random()*(84-10)+10);
 let url = "https://api.allorigins.win/raw?url=http://numbersapi.com/" + number; 
 let count = 0;
 let answer = 0;
+let clicks = 0;
 
 if (sessionStorage.getItem("score") < 1) {
 sessionStorage.setItem("score",0);
@@ -16,6 +17,18 @@ console.log(number)
 $.get(url, function(data) {
     $('#number').text(data.slice(3, -1));
 });
+
+function getInsult() {
+  $.get('https://api.allorigins.win/raw?url=http://evilinsult.com/generate_insult.php?lang=en&type='+number, function(data) {
+    $('#complinsult').text(data);
+});
+}
+
+function getCompliment() {
+  $.get('https://8768zwfurd.execute-api.us-east-1.amazonaws.com/v1/compliments', function(data) {
+    $('#complinsult').text(data);
+});
+}
 
 function wrong() {
   device && device.send([0x90,64,5]);
@@ -310,6 +323,8 @@ function handleInput(input) {
   let command   = input.data[0];
   note = input.data[1];
   let velocity  = input.data[2];
+
+  clicks++;
   
   //Use to quickly get code for button clicks
   //so u dont have to manually write all of them
@@ -394,33 +409,44 @@ if (velocity == 127 && count < 1) {
 var answerTens = roundUpNearest10(answer);
 var numberTens = roundUpNearest10(number);
 
-if (answerTens == numberTens && velocity == 127) {
+//IF CORRECT
+if (answerTens == numberTens && velocity == 127 && clicks == 1) {
 sessionStorage.setItem("score", 1 + parseInt(sessionStorage.getItem("score")));
 
 setTimeout(() => {  
+  getCompliment();
   document.getElementById("answer").innerHTML += "<h3>Correct! The exact answer was " + number + ". <br>+1 Point</h3>";
   clear();
   correct();
 }, 500);
 
-setTimeout(location.reload.bind(location), 2000);
+setTimeout(location.reload.bind(location), 2500);
 document.getElementById("score").innerHTML = "Score: " + (sessionStorage.getItem("score"));
 
 
 }
-else if (velocity == 127){  
+
+//IF WRONG
+else if (velocity == 127 && clicks == 1){  
 
   if (sessionStorage.getItem("score") != 0) {
     sessionStorage.setItem("score", -1 + parseInt(sessionStorage.getItem("score")))
   }
 
 setTimeout(() => {  
+if (sessionStorage.getItem("score") > 0) {
   document.getElementById("answer").innerHTML += "<h3>Wrong! The correct answer was " + number + ". <br>-1 Point</h3>";
+  getInsult();
+}
+else {
+document.getElementById("answer").innerHTML += "<h3>Wrong! The correct answer was " + number + ".</h3>";
+getInsult();
+}
   clear();
   wrong();
 }, 500);
 
-setTimeout(location.reload.bind(location), 2000);
+setTimeout(location.reload.bind(location), 2500);
 document.getElementById("score").innerHTML = "Score: " + (sessionStorage.getItem("score"));
 }
 }
