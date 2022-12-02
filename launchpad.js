@@ -1,6 +1,6 @@
 //DEFINE SOME VARIABLES
 let number = Math.round(Math.random()*(84-10)+10);
-let url = "http://numbersapi.com/" + number + "/?write&fragment"; 
+let url = "https://api.allorigins.win/raw?url=http://numbersapi.com/" + number + "/?write&fragment"; 
 let count = 0;
 let answer = 0;
 
