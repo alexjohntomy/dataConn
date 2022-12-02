@@ -1,6 +1,6 @@
 //DEFINE SOME VARIABLES
 let number = Math.round(Math.random()*(84-10)+10);
-let url = "https://api.allorigins.win/raw?url=http://numbersapi.com/" + number + "/?write&fragment"; 
+let url = "https://api.allorigins.win/raw?url=http://numbersapi.com/" + number; 
 let count = 0;
 let answer = 0;
 
@@ -12,8 +12,9 @@ document.getElementById("score").innerHTML = "Score: " + (sessionStorage.getItem
 console.log(number)
 
 //JQUERY GET NUMBERS API 
+//FRAGMENT SO IT CAN BE QUESTION INSTEAD OF STATEMENT
 $.get(url, function(data) {
-    $('#number').text(data);
+    $('#number').text(data.slice(3, -1));
 });
 
 function wrong() {
@@ -201,10 +202,12 @@ if (navigator.requestMIDIAccess) {
 
 }
 
+//SHOW X IF FAIL
 function failure() {
   console.log("Could not connect MIDI");
 }
 
+//SOME MIDI SETUP
 function updateDevices(event) {
   // console.log(event);
 }
@@ -218,7 +221,7 @@ function success(midiAccess) {
         // console.log('Output device selected', device);
     }
 
-//COLOR EVERYTHING
+//COLOR EVERYTHING 1
 device && device.send([0x90,64,5]);
 device && device.send([0x90,60,5]);
 device && device.send([0x90,56,5]);
@@ -228,7 +231,7 @@ device && device.send([0x90,44,5]);
 device && device.send([0x90,40,5]);
 device && device.send([0x90,36,5]);
 
-//COLOR EVERYTHING
+//COLOR EVERYTHING 2
 device && device.send([0x90,65,9]);
 device && device.send([0x90,61,9]);
 device && device.send([0x90,57,9]);
@@ -238,7 +241,7 @@ device && device.send([0x90,45,9]);
 device && device.send([0x90,41,9]);
 device && device.send([0x90,37,9]);
 
-//COLOR EVERYTHING
+//COLOR EVERYTHING 3
 device && device.send([0x90,66,13]);
 device && device.send([0x90,62,13]);
 device && device.send([0x90,58,13]);
@@ -248,7 +251,7 @@ device && device.send([0x90,46,13]);
 device && device.send([0x90,42,13]);
 device && device.send([0x90,38,13]);
 
-//COLOR EVERYTHING
+//COLOR EVERYTHING 4 
 device && device.send([0x90,67,21]);
 device && device.send([0x90,63,21]);
 device && device.send([0x90,59,21]);
@@ -258,7 +261,7 @@ device && device.send([0x90,47,21]);
 device && device.send([0x90,43,21]);
 device && device.send([0x90,39,21]);
 
-//COLOR EVERYTHING
+//COLOR EVERYTHING 5
 device && device.send([0x90,96,41]);
 device && device.send([0x90,92,41]);
 device && device.send([0x90,88,41]);
@@ -268,7 +271,7 @@ device && device.send([0x90,76,41]);
 device && device.send([0x90,72,41]);
 device && device.send([0x90,68,41]);
 
-//COLOR EVERYTHING
+//COLOR EVERYTHING 6
 device && device.send([0x90,97,49]);
 device && device.send([0x90,93,49]);
 device && device.send([0x90,89,49]);
@@ -278,7 +281,7 @@ device && device.send([0x90,77,49]);
 device && device.send([0x90,73,49]);
 device && device.send([0x90,69,49]);
 
-//COLOR EVERYTHING
+//COLOR EVERYTHING 7
 device && device.send([0x90,98,57]);
 device && device.send([0x90,94,57]);
 device && device.send([0x90,90,57]);
@@ -288,7 +291,7 @@ device && device.send([0x90,78,57]);
 device && device.send([0x90,74,57]);
 device && device.send([0x90,70,57]);
 
-//COLOR EVERYTHING
+//COLOR EVERYTHING 8
 device && device.send([0x90,99,3]);
 device && device.send([0x90,95,3]);
 device && device.send([0x90,91,3]);
@@ -297,8 +300,6 @@ device && device.send([0x90,83,3]);
 device && device.send([0x90,79,3]);
 device && device.send([0x90,75,3]);
 device && device.send([0x90,71,3]);
-
-
 
   inputs.forEach((input) => {
     input.addEventListener('midimessage', handleInput);
