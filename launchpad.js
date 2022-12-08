@@ -2,21 +2,13 @@
 
 //DEFINE SOME VARIABLES
 let number = Math.round(Math.random()*(84-10)+10);
-let url = "https://proxy.cors.sh/http://numbersapi.com/" + number;
+let url = "https://api.codetabs.com/v1/proxy/?quest=http://numbersapi.com/" + number;
 let count = 0;
 let answer = 0;
 let clicks = 0;
 
 const heightOutput = document.querySelector("#height");
 const widthOutput = document.querySelector("#width");
-
-function resizeListener() {
-  heightOutput.textContent = window.innerHeight;
-  widthOutput.textContent = window.innerWidth;
-}
-
-window.addEventListener("resize", resizeListener);
-
 
 if (sessionStorage.getItem("score") < 1) {
 sessionStorage.setItem("score",0);
@@ -32,14 +24,14 @@ $.get(url, function(data) {
 });
 
 function getInsult() {
-    $.get('https://proxy.cors.sh/http://evilinsult.com/generate_insult.php?lang=en&type='+number, function(data) {
+    $.get('https://api.codetabs.com/v1/proxy/?quest=http://evilinsult.com/generate_insult.php?lang=en&type='+number, function(data) {
 
     $('#complinsult').text(data);
 });
 }
 
 function getCompliment() {
-  $.get('https://proxy.cors.sh/https://8768zwfurd.execute-api.us-east-1.amazonaws.com/v1/compliments', function(data) {
+  $.get('https://api.codetabs.com/v1/proxy/?quest=https://8768zwfurd.execute-api.us-east-1.amazonaws.com/v1/compliments', function(data) {
     $('#complinsult').text(data);
 });
 }
