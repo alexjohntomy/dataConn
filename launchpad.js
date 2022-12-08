@@ -1,7 +1,7 @@
 //DEFINE SOME VARIABLES
 let number = Math.round(Math.random()*(84-10)+10);
 // let url = "https://api.allorigins.win/raw?url=http://numbersapi.com/" + number; 
-let url = "https://crossorigin.me/http://numbersapi.com/" + number;
+let url = "https://proxy.cors.sh/http://numbersapi.com/" + number;
 let count = 0;
 let answer = 0;
 let clicks = 0;
@@ -21,14 +21,14 @@ $.get(url, function(data) {
 
 function getInsult() {
   // $.get('https://api.allorigins.win/raw?url=http://evilinsult.com/generate_insult.php?lang=en&type='+number, function(data) {
-    $.get('https://crossorigin.me/http://evilinsult.com/generate_insult.php?lang=en&type='+number, function(data) {
+    $.get('https://proxy.cors.sh/http://evilinsult.com/generate_insult.php?lang=en&type='+number, function(data) {
 
     $('#complinsult').text(data);
 });
 }
 
 function getCompliment() {
-  $.get('https://crossorigin.me/https://8768zwfurd.execute-api.us-east-1.amazonaws.com/v1/compliments', function(data) {
+  $.get('https://proxy.cors.sh/https://8768zwfurd.execute-api.us-east-1.amazonaws.com/v1/compliments', function(data) {
     $('#complinsult').text(data);
 });
 }
