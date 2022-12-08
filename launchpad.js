@@ -1,7 +1,7 @@
 //DEFINE SOME VARIABLES
 let number = Math.round(Math.random()*(84-10)+10);
 // let url = "https://api.allorigins.win/raw?url=http://numbersapi.com/" + number; 
-let url = "https://crossorigin.me/http://numbersapi.com" + number;
+let url = "https://crossorigin.me/http://numbersapi.com/" + number;
 let count = 0;
 let answer = 0;
 let clicks = 0;
