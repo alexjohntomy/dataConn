@@ -1,10 +1,22 @@
+//HAVING TO USE A PROXY TO BYPASS CORS
+
 //DEFINE SOME VARIABLES
 let number = Math.round(Math.random()*(84-10)+10);
-// let url = "https://api.allorigins.win/raw?url=http://numbersapi.com/" + number; 
 let url = "https://proxy.cors.sh/http://numbersapi.com/" + number;
 let count = 0;
 let answer = 0;
 let clicks = 0;
+
+const heightOutput = document.querySelector("#height");
+const widthOutput = document.querySelector("#width");
+
+function resizeListener() {
+  heightOutput.textContent = window.innerHeight;
+  widthOutput.textContent = window.innerWidth;
+}
+
+window.addEventListener("resize", resizeListener);
+
 
 if (sessionStorage.getItem("score") < 1) {
 sessionStorage.setItem("score",0);
@@ -20,7 +32,6 @@ $.get(url, function(data) {
 });
 
 function getInsult() {
-  // $.get('https://api.allorigins.win/raw?url=http://evilinsult.com/generate_insult.php?lang=en&type='+number, function(data) {
     $.get('https://proxy.cors.sh/http://evilinsult.com/generate_insult.php?lang=en&type='+number, function(data) {
 
     $('#complinsult').text(data);
@@ -326,7 +337,6 @@ function handleInput(input) {
   let command   = input.data[0];
   note = input.data[1];
   let velocity  = input.data[2];
-
   clicks++;
   
   //Use to quickly get code for button clicks
@@ -338,14 +348,7 @@ if (velocity == 127 && count < 1) {
   if (note ==  64 || note == 60 || note == 56 || note == 52 || note == 48 || note == 44 || note == 40 || note == 36) {
     document.getElementById("answer").innerHTML += "<h3>" + 10 + "</h3>";
     count+=1;
-    answer=10;
-// const canvas = document.getElementById("body");
-// const ctx = canvas.getContext("2d");
-
-// ctx.beginPath(); // Start a new path
-// ctx.moveTo(30, 50); // Move the pen to (30, 50)
-// ctx.lineTo(150, 100); // Draw a line to (150, 100)
-// ctx.stroke(); // Render the path
+    answer=10;      
     }
   } 
   
