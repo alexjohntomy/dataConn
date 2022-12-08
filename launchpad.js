@@ -1,6 +1,7 @@
 //DEFINE SOME VARIABLES
 let number = Math.round(Math.random()*(84-10)+10);
-let url = "https://api.allorigins.win/raw?url=http://numbersapi.com/" + number; 
+// let url = "https://api.allorigins.win/raw?url=http://numbersapi.com/" + number; 
+let url = "http://numbersapi.com/" + number;
 let count = 0;
 let answer = 0;
 let clicks = 0;
@@ -19,7 +20,9 @@ $.get(url, function(data) {
 });
 
 function getInsult() {
-  $.get('https://api.allorigins.win/raw?url=http://evilinsult.com/generate_insult.php?lang=en&type='+number, function(data) {
+  // $.get('https://api.allorigins.win/raw?url=http://evilinsult.com/generate_insult.php?lang=en&type='+number, function(data) {
+    $.get('http://evilinsult.com/generate_insult.php?lang=en&type='+number, function(data) {
+
     $('#complinsult').text(data);
 });
 }
@@ -336,6 +339,13 @@ if (velocity == 127 && count < 1) {
     document.getElementById("answer").innerHTML += "<h3>" + 10 + "</h3>";
     count+=1;
     answer=10;
+// const canvas = document.getElementById("body");
+// const ctx = canvas.getContext("2d");
+
+// ctx.beginPath(); // Start a new path
+// ctx.moveTo(30, 50); // Move the pen to (30, 50)
+// ctx.lineTo(150, 100); // Draw a line to (150, 100)
+// ctx.stroke(); // Render the path
     }
   } 
   
